@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.novoda.bintray-release'
 
-group='com.github.jd-alexander'
+//group='com.github.jd-alexander'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    compileSdkVersion 28
 
     lintOptions {
         abortOnError false
@@ -27,7 +27,18 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:27.0.1'
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+
+    // 使用compileOnly，不把support包编译进去
+    compileOnly 'com.android.support:appcompat-v7:27.0.1'
+}
+
+publish {
+    userOrg = 'kylingo'
+    groupId = 'com.github.kylingo'
+    artifactId = 'LikeButton'
+    publishVersion = '0.2.3'
+    desc = 'Android like button library'
+    website = 'https://github.com/kylingo/LikeButton'
 }
